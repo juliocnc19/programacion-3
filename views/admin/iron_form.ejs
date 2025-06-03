@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+<div class="container mt-5">
+  <h2><%= iron ? 'Editar Hierro' : 'Nuevo Hierro' %></h2>
+  <form method="POST" action="<%= iron ? ('/admin/irons/edit/' + iron.id) : '/admin/irons/new' %>">
+    <div class="mb-3">
+      <label for="symbolImageUrl" class="form-label">URL de Imagen</label>
+      <input type="text" class="form-control" id="symbolImageUrl" name="symbolImageUrl" required value="<%= iron ? iron.symbolImageUrl : '' %>">
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripción</label>
+      <textarea class="form-control" id="description" name="description"><%= iron ? iron.description : '' %></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="userId" class="form-label">Usuario</label>
+      <select class="form-select" id="userId" name="userId" required>
+        <% users.forEach(user => { %>
+          <option value="<%= user.id %>" <%= iron && iron.userId === user.id ? 'selected' : '' %>><%= user.username %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/admin/irons" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+<%- include('../partials/footer') %>

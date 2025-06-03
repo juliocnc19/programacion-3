@@ -15,6 +15,7 @@ const prisma = new PrismaClient();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
 //const ranchesRouter = require('./routes/ranches');
 //const ironsRouter = require('./routes/irons');
 
@@ -71,6 +72,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/admin', adminRouter);
 //app.use('/ranches', ranchesRouter);
 //app.use('/irons', ironsRouter);
 

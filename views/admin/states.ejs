@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+<div class="container mt-5">
+  <h2>Estados</h2>
+  <a href="/admin/states/new" class="btn btn-success mb-3">Nuevo Estado</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th><th>Nombre</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% states.forEach(state => { %>
+        <tr>
+          <td><%= state.id %></td>
+          <td><%= state.name %></td>
+          <td>
+            <a href="/admin/states/edit/<%= state.id %>" class="btn btn-warning btn-sm">Editar</a>
+            <form action="/admin/states/delete/<%= state.id %>" method="POST" style="display:inline;">
+              <button class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar estado?')">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../partials/footer') %>

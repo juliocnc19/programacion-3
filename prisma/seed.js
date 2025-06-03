@@ -37,6 +37,7 @@ async function main() {
         email: 'admin@sistema.com',
         password: hashedPassword,
         roleId: adminRole.id,
+        ci: 0,
       },
     });
 
@@ -44,6 +45,42 @@ async function main() {
     console.log('Credenciales de acceso:');
     console.log('Usuario: admin');
     console.log('Contraseña: admin123');
+
+    // Crear estados
+    console.log('Creando estados...');
+    const estados = [
+      'Estado Anzoátegui',
+      'Estado Apure',
+      'Estado Aragua',
+      'Estado Barinas',
+      'Estado Bolívar',
+      'Estado Carabobo',
+      'Estado Cojedes',
+      'Estado Falcón',
+      'Estado Guárico',
+      'Estado Lara',
+      'Estado Mérida',
+      'Estado Miranda',
+      'Estado Monagas',
+      'Estado Nueva Esparta',
+      'Estado Portuguesa',
+      'Estado Sucre',
+      'Estado Táchira',
+      'Estado Trujillo',
+      'Estado Yaracuy',
+      'Estado Zulia',
+      'Distrito Federal',
+      'Territorio Federal Amazonas',
+      'Territorio Federal Delta Amacuro',
+    ];
+    for (const nombre of estados) {
+      await prisma.state.upsert({
+        where: { name: nombre },
+        update: {},
+        create: { name: nombre },
+      });
+    }
+    console.log('Estados creados.');
 
   } catch (error) {
     console.error('Error en la semilla:', error);

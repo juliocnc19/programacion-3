@@ -71,14 +71,15 @@ const authController = {
   // Procesar registro
   register: async (req, res) => {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password, ci } = req.body;
 
       // Verificar si el usuario ya existe
       const existingUser = await req.prisma.user.findFirst({
         where: {
           OR: [
             { username },
-            { email }
+            { email },
+            { ci: Number(ci) }
           ]
         }
       });
@@ -86,7 +87,7 @@ const authController = {
       if (existingUser) {
         return res.render('auth/register', {
           title: 'Registro de Ganadero',
-          error: 'El usuario o email ya está registrado'
+          error: 'El usuario, email o cédula ya está registrado'
         });
       }
 
@@ -99,16 +100,16 @@ const authController = {
         throw new Error('Rol de ganadero no encontrado');
       }
 
-      // Encriptar contraseña
+      // Hashear contraseña
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Crear usuario
       const newUser = await req.prisma.user.create({
         data: {
           username,
           email,
           password: hashedPassword,
-          roleId: ganaderoRole.id
+          roleId: ganaderoRole.id,
+          ci: Number(ci)
         }
       });
 

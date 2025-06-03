@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h3 class="text-center mb-0">Panel de Administrador</h3>
+          <span class="badge bg-primary">Admin</span>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-info text-center">Bienvenido, tienes acceso total para gestionar todo el sistema.</div>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <h5 class="card-title">Usuarios</h5>
+                  <p class="card-text">Gestiona los usuarios del sistema: crear, leer, actualizar y eliminar.</p>
+                  <a href="/admin/users" class="btn btn-outline-primary mt-auto">Administrar Usuarios</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <h5 class="card-title">Roles</h5>
+                  <p class="card-text">Gestiona los roles de usuario: crear, leer, actualizar y eliminar.</p>
+                  <a href="/admin/roles" class="btn btn-outline-primary mt-auto">Administrar Roles</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <h5 class="card-title">Estados</h5>
+                  <p class="card-text">Gestiona los estados: crear, leer, actualizar y eliminar.</p>
+                  <a href="/admin/states" class="btn btn-outline-primary mt-auto">Administrar Estados</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <h5 class="card-title">Hierros</h5>
+                  <p class="card-text">Gestiona los hierros: crear, leer, actualizar y eliminar.</p>
+                  <a href="/admin/irons" class="btn btn-outline-primary mt-auto">Administrar Hierros</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

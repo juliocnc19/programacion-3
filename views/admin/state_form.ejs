@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<div class="container mt-5">
+  <h2><%= state ? 'Editar Estado' : 'Nuevo Estado' %></h2>
+  <form method="POST" action="<%= state ? ('/admin/states/edit/' + state.id) : '/admin/states/new' %>">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre del Estado</label>
+      <input type="text" class="form-control" id="name" name="name" required value="<%= state ? state.name : '' %>">
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/admin/states" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+<%- include('../partials/footer') %>

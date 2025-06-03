@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+<div class="container mt-5">
+  <h2>Roles</h2>
+  <a href="/admin/roles/new" class="btn btn-success mb-3">Nuevo Rol</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th><th>Nombre</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% roles.forEach(role => { %>
+        <tr>
+          <td><%= role.id %></td>
+          <td><%= role.name %></td>
+          <td>
+            <a href="/admin/roles/edit/<%= role.id %>" class="btn btn-warning btn-sm">Editar</a>
+            <form action="/admin/roles/delete/<%= role.id %>" method="POST" style="display:inline;">
+              <button class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar rol?')">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('../partials/footer') %>
