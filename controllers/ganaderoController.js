@@ -10,39 +10,49 @@ const ganaderoController = {
   listIrons: async (req, res) => {
     const irons = await req.prisma.iron.findMany({
       where: { userId: req.session.user.id },
+      include: { state: true },
       orderBy: { createdAt: 'desc' }
     });
     res.render('ganadero/irons', { irons, title: 'Mis Hierros' });
   },
 
   // Mostrar formulario para crear hierro
-  showIronForm: (req, res) => {
-    res.render('ganadero/iron_form', { title: 'Nuevo Hierro', error: null });
+  showIronForm: async (req, res) => {
+    const states = await req.prisma.state.findMany();
+    res.render('ganadero/iron_form', { title: 'Nuevo Hierro', error: null, states });
   },
 
   // Crear hierro (con imagen)
   createIron: async (req, res) => {
     try {
-      const { description } = req.body;
+      const { description, stateId } = req.body;
       let symbolImageUrl = '';
+
+      const states = await req.prisma.state.findMany();
 
       if (req.file) {
         symbolImageUrl = '/uploads/' + req.file.filename;
       } else {
-        return res.render('ganadero/iron_form', { title: 'Nuevo Hierro', error: 'Debe subir una imagen.' });
+        return res.render('ganadero/iron_form', { title: 'Nuevo Hierro', error: 'Debe subir una imagen.', states });
+      }
+
+      if (!stateId) {
+        return res.render('ganadero/iron_form', { title: 'Nuevo Hierro', error: 'Debe seleccionar un estado.', states });
       }
 
       await req.prisma.iron.create({
         data: {
           symbolImageUrl,
           description,
-          userId: req.session.user.id
+          userId: req.session.user.id,
+          stateId: Number(stateId)
         }
       });
       res.redirect('/ganadero/hierros');
     } catch (error) {
       console.error('Error al crear hierro:', error);
-      res.render('ganadero/iron_form', { title: 'Nuevo Hierro', error: 'Error al crear el hierro.' });
+      const states = await req.prisma.state.findMany();
+      res.render('ganadero/iron_form', { title: 'Nuevo Hierro', error: 'Error al crear el hierro.', states });
     }
   }
 };

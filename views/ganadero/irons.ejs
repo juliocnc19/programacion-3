@@ -7,6 +7,7 @@
       <tr>
         <th>Imagen</th>
         <th>Descripción</th>
+        <th>Estado</th>
         <th>Fecha de Registro</th>
       </tr>
     </thead>
@@ -18,6 +19,7 @@
         <tr>
           <td><img src="<%= iron.symbolImageUrl %>" alt="Hierro" width="80"></td>
           <td><%= iron.description || '' %></td>
+          <td><%= iron.state ? iron.state.name : '' %></td>
           <td><%= new Date(iron.createdAt).toLocaleString() %></td>
         </tr>
       <% }) %>

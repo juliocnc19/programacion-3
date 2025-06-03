@@ -87,27 +87,28 @@ const adminController = {
 
   // Hierros
   listIrons: async (req, res) => {
-    const irons = await req.prisma.iron.findMany({ include: { user: true } });
+    const irons = await req.prisma.iron.findMany({ include: { user: true, state: true } });
     res.render('admin/irons', { irons, title: 'Administrar Hierros' });
   },
   showIronForm: async (req, res) => {
     const users = await req.prisma.user.findMany();
+    const states = await req.prisma.state.findMany();
     let iron = null;
     if (req.params.id) iron = await req.prisma.iron.findUnique({ where: { id: Number(req.params.id) } });
-    res.render('admin/iron_form', { iron, users, title: iron ? 'Editar Hierro' : 'Nuevo Hierro' });
+    res.render('admin/iron_form', { iron, users, states, title: iron ? 'Editar Hierro' : 'Nuevo Hierro' });
   },
   createIron: async (req, res) => {
-    const { symbolImageUrl, description, userId } = req.body;
+    const { symbolImageUrl, description, userId, stateId } = req.body;
     await req.prisma.iron.create({
-      data: { symbolImageUrl, description, userId: Number(userId) }
+      data: { symbolImageUrl, description, userId: Number(userId), stateId: Number(stateId) }
     });
     res.redirect('/admin/irons');
   },
   updateIron: async (req, res) => {
-    const { symbolImageUrl, description, userId } = req.body;
+    const { symbolImageUrl, description, userId, stateId } = req.body;
     await req.prisma.iron.update({
       where: { id: Number(req.params.id) },
-      data: { symbolImageUrl, description, userId: Number(userId) }
+      data: { symbolImageUrl, description, userId: Number(userId), stateId: Number(stateId) }
     });
     res.redirect('/admin/irons');
   },

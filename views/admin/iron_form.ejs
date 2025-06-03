@@ -18,6 +18,14 @@
         <% }) %>
       </select>
     </div>
+    <div class="mb-3">
+      <label for="stateId" class="form-label">Estado</label>
+      <select class="form-select" id="stateId" name="stateId" required>
+        <% states.forEach(state => { %>
+          <option value="<%= state.id %>" <%= iron && iron.stateId === state.id ? 'selected' : '' %>><%= state.name %></option>
+        <% }) %>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a href="/admin/irons" class="btn btn-secondary">Cancelar</a>
   </form>
