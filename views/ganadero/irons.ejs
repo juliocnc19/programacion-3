@@ -17,7 +17,7 @@
       <% } %>
       <% irons.forEach(iron => { %>
         <tr>
-          <td><img src="<%= iron.symbolImageUrl %>" alt="Hierro" width="80"></td>
+          <td><a href="<%= iron.symbolImageUrl %>" target="_blank"><img src="<%= iron.symbolImageUrl %>" alt="Hierro" width="80"></a></td>
           <td><%= iron.description || '' %></td>
           <td><%= iron.state ? iron.state.name : '' %></td>
           <td><%= new Date(iron.createdAt).toLocaleString() %></td>
