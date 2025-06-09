@@ -26,8 +26,45 @@
             </div>
 
             <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="apellido" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="apellido" name="apellido" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="age" class="form-label">Edad</label>
+              <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+
+            <div class="mb-3">
               <label for="email" class="form-label">Correo Electrónico</label>
               <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">Teléfono</label>
+              <input type="number" class="form-control" id="phone" name="phone">
+            </div>
+
+            <div class="mb-3">
+              <label for="stateId" class="form-label">Estado</label>
+              <select class="form-select" id="stateId" name="stateId">
+                <option value="">Seleccione un estado...</option>
+                <% if (typeof states !== 'undefined' && states.length > 0) { %>
+                  <% states.forEach(state => { %>
+                    <option value="<%= state.id %>"><%= state.name %></option>
+                  <% }) %>
+                <% } %>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="municipio" class="form-label">Municipio</label>
+              <input type="text" class="form-control" id="municipio" name="municipio">
             </div>
             
             <div class="mb-3">

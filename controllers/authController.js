@@ -61,19 +61,34 @@ const authController = {
   },
 
   // Mostrar formulario de registro
-  showRegister: (req, res) => {
-    res.render('auth/register', {
-      title: 'Registro de Ganadero',
-      error: null
-    });
+  showRegister: async (req, res) => {
+    try {
+      const states = await req.prisma.state.findMany();
+      res.render('auth/register', {
+        title: 'Registro de Ganadero',
+        error: null,
+        states: states
+      });
+    } catch (error) {
+      console.error('Error fetching states for register form:', error);
+      res.render('auth/register', {
+        title: 'Registro de Ganadero',
+        error: 'Error al cargar el formulario de registro',
+        states: []
+      });
+    }
   },
 
   // Procesar registro
   register: async (req, res) => {
     try {
-      const { username, email, password, ci } = req.body;
+      const { 
+        username, email, password, ci, nombre, apellido,
+        stateId, municipio, 
+      } = req.body;
 
       // Verificar si el usuario ya existe
+      console.log(req.body);
       const existingUser = await req.prisma.user.findFirst({
         where: {
           OR: [
@@ -109,7 +124,11 @@ const authController = {
           email,
           password: hashedPassword,
           roleId: ganaderoRole.id,
-          ci: Number(ci)
+          ci: Number(ci),
+          nombre: nombre,
+          apellido: apellido,
+          stateId: stateId ? Number(stateId) : null,
+          municipio: municipio || null,
         }
       });
 

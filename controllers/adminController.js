@@ -16,17 +16,17 @@ const adminController = {
     res.render('admin/user_form', { user, roles, title: user ? 'Editar Usuario' : 'Nuevo Usuario' });
   },
   createUser: async (req, res) => {
-    const { username, email, password, ci, roleId } = req.body;
+    const { username, email, password, ci, roleId, age } = req.body;
     await req.prisma.user.create({
-      data: { username, email, password, ci: Number(ci), roleId: Number(roleId) }
+      data: { username, email, password, ci: Number(ci), roleId: Number(roleId), age: Number(age) }
     });
     res.redirect('/admin/users');
   },
   updateUser: async (req, res) => {
-    const { username, email, ci, roleId } = req.body;
+    const { username, email, ci, roleId, age } = req.body;
     await req.prisma.user.update({
       where: { id: Number(req.params.id) },
-      data: { username, email, ci: Number(ci), roleId: Number(roleId) }
+      data: { username, email, ci: Number(ci), roleId: Number(roleId), age: Number(age) }
     });
     res.redirect('/admin/users');
   },
@@ -98,9 +98,9 @@ const adminController = {
     res.render('admin/iron_form', { iron, users, states, title: iron ? 'Editar Hierro' : 'Nuevo Hierro' });
   },
   createIron: async (req, res) => {
-    const { symbolImageUrl, description, userId, stateId } = req.body;
+    const { symbolImageUrl, description, userId, stateId,municipio } = req.body;
     await req.prisma.iron.create({
-      data: { symbolImageUrl, description, userId: Number(userId), stateId: Number(stateId) }
+      data: { symbolImageUrl, description, userId: Number(userId), stateId: Number(stateId),municipio }
     });
     res.redirect('/admin/irons');
   },

@@ -16,6 +16,11 @@ model User {
   password  String
   email     String   @unique
   ci        Int      @unique
+  nombre    String?
+  apellido  String?
+  state     State?    @relation(fields: [stateId], references: [id])
+  stateId   Int?
+  municipio String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   role      Role     @relation(fields: [roleId], references: [id])
@@ -44,6 +49,8 @@ model Iron {
   updatedAt       DateTime @updatedAt
   user            User     @relation(fields: [userId], references: [id])
   userId          Int
+  type            String
+  municipio       String?
   state           State    @relation(fields: [stateId], references: [id])
   stateId         Int
 
@@ -56,6 +63,7 @@ model State {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   irons     Iron[]
+  users     User[]
 
   @@map("states")
 } 

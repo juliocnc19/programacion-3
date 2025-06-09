@@ -9,11 +9,12 @@
         <th>Descripción</th>
         <th>Estado</th>
         <th>Fecha de Registro</th>
+        <th>Municipio</th>
       </tr>
     </thead>
     <tbody>
       <% if (irons.length === 0) { %>
-        <tr><td colspan="3">No tienes hierros registrados.</td></tr>
+        <tr><td colspan="5">No tienes hierros registrados.</td></tr>
       <% } %>
       <% irons.forEach(iron => { %>
         <tr>
@@ -21,6 +22,7 @@
           <td><%= iron.description || '' %></td>
           <td><%= iron.state ? iron.state.name : '' %></td>
           <td><%= new Date(iron.createdAt).toLocaleString() %></td>
+          <td><%= iron.municipio || '' %></td>
         </tr>
       <% }) %>
     </tbody>

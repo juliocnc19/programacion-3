@@ -25,7 +25,7 @@ const ganaderoController = {
   // Crear hierro (con imagen)
   createIron: async (req, res) => {
     try {
-      const { description, stateId } = req.body;
+      const { description, stateId,municipio,type } = req.body;
       let symbolImageUrl = '';
 
       const states = await req.prisma.state.findMany();
@@ -45,7 +45,9 @@ const ganaderoController = {
           symbolImageUrl,
           description,
           userId: req.session.user.id,
-          stateId: Number(stateId)
+          stateId: Number(stateId),
+          municipio,
+          type:type
         }
       });
       res.redirect('/ganadero/hierros');

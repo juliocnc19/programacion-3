@@ -22,6 +22,17 @@
         <% }) %>
       </select>
     </div>
+    <div class="mb-3">
+      <label for="municipio" class="form-label">Municipio <span class="text-danger">*</span></label>
+      <input type="text" name="municipio" id="municipio" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">Tipo<span class="text-danger">*</span></label>
+      <select name="type" id="type" class="form-select" required>
+        <option value="natural">Natural</option>
+        <option value="juridico">Juridico</option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">Registrar Hierro</button>
     <a href="/ganadero/hierros" class="btn btn-secondary">Cancelar</a>
   </form>

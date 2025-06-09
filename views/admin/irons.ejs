@@ -5,7 +5,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>ID</th><th>Imagen</th><th>Descripción</th><th>Usuario</th><th>Estado</th><th>Acciones</th>
+        <th>ID</th><th>Imagen</th><th>Descripción</th><th>Usuario</th><th>Estado</th><th>Municipio</th><th>Tipo</th><th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +16,8 @@
           <td><%= iron.description %></td>
           <td><%= iron.user ? iron.user.username : '' %></td>
           <td><%= iron.state ? iron.state.name : '' %></td>
+          <td><%= iron.municipio %></td>
+          <td><%= iron.type %></td>
           <td>
             <a href="/admin/irons/edit/<%= iron.id %>" class="btn btn-warning btn-sm">Editar</a>
             <form action="/admin/irons/delete/<%= iron.id %>" method="POST" style="display:inline;">

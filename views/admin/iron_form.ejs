@@ -26,6 +26,17 @@
         <% }) %>
       </select>
     </div>
+    <div class="mb-3">
+      <label for="municipio" class="form-label">Municipio</label>
+      <input type="text" class="form-control" id="municipio" name="municipio" required value="<%= iron ? iron.municipio : '' %>">
+    </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">Tipo</label>
+      <select class="form-select" id="type" name="type" required>
+        <option value="natural" <%= iron && iron.type === 'natural' ? 'selected' : '' %>>Natural</option>
+        <option value="juridico" <%= iron && iron.type === 'juridico' ? 'selected' : '' %>>Jurídico</option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a href="/admin/irons" class="btn btn-secondary">Cancelar</a>
   </form>
